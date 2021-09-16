@@ -37,5 +37,21 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+
+        // Semua method & function ada di AuthenticatesUsers
+    }
+
+    // Override function showLoginForm dari AuthenticatesUsers
+    public function showLoginForm()
+    {
+        return view('auth.login');
+        // return view('otentikasi.login');    // Ubah pakai hlm login custom sendiri
+    }
+
+    // Override function username dari AuthenticatesUsers
+    public function username()
+    {
+        // return 'email';
+        return 'username';  // Ubah credential login jadi pakai username bukan email
     }
 }
