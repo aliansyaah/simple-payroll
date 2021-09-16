@@ -18,5 +18,14 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+// Route::post('/', 'Auth\LoginController@login')->name('login');
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/dashboard', function () { return view('index'); });
+    // Route::get('logout', 'App\Http\Controllers\Auth\AuthController@logout')->name('logout');
+
+    Route::resource('konfigurasi/setup', 'Konfigurasi\SetupController');
+});
