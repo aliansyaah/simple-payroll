@@ -10,10 +10,8 @@
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
             {{-- Jika belum ada data, tampilkan tombol tambah --}}
-            @if (sizeof($setup) == 0)    
-                {{-- <a href="{{ route('crud.add') }}" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Tambah Data</a> --}}
-                {{-- <a href="{{ url('home') }}" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Tambah Data</a> --}}
-                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Data</button>
+            @if (sizeof($setup) == 0)
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus"></i> Tambah Data</button>
             @endif
             <hr>
 
@@ -33,45 +31,33 @@
                 <tr>
                     <th>No.</th>
                     <th>Hari Kerja</th>
+                    <th>Nama Aplikasi</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($setup as $no => $val)
                     <tr>
                         <td>{{ $no+1 }}</td>
                         <td>{{ $val->jumlah_hari_kerja }}</td>
+                        <td>{{ $val->nama_aplikasi }}</td>
                         {{-- <td>1</td>
                         <td>{{ $setup->jumlah_hari_kerja }}</td> --}}
                         <td>
-                            <a href="{{ route('crud.edit', $val->id) }}" class="badge badge-warning">Edit</a>
-                            {{-- <a href="{{ route('crud.edit', $setup->id) }}" class="badge badge-warning">Edit</a> --}}
-
-                            {{-- "id" pada atribut data-id adalah nama dataset --}}
-                            {{-- <a href="#" data-id="{{ $val->id }}" class="badge badge-danger swal-confirm">
-                                <form action="{{ route('crud.delete', $val->id) }}" id="deleteForm{{ $val->id }}" method="POST">
-                                <form action="{{ route('crud.delete', $val->id) }}" id="deleteForm" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                </form>
-                                Delete
-                            </a> --}}
+                            <a href="#" data-id="{{ $val->id }}" class="badge badge-warning btn-edit">Edit</a>
                         </td>
                     </tr>
                 @endforeach
             </table>
-            {{-- For pagination button --}}
-            {{-- {{ $setup->links() }} --}}
-            
             {{-- Pakai versi bootstrap 4 untuk handle bug pagination --}}
             {{-- {{ $setup->links('pagination::bootstrap-4') }} --}}
         </div>
     </div>
 </div>
     @section('modal')
-    <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-add">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Tambah Data</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -115,6 +101,29 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-edit">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ubah Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('setup.store') }}" method="POST" id="form-edit">
+                    @csrf
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary btn-update">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     @endsection
 @endsection
 
@@ -146,6 +155,50 @@
             } else {
                 // Saat kita pilih cancel
                 // swal('Your imaginary file is safe!');
+            }
+        });
+    });
+
+    @if($errors->any())
+        $('#modal-add').modal('show');
+    @endif
+
+    $(".btn-edit").on('click', function(){
+        // console.log($(this).data('id'));
+        let id = $(this).data('id');
+
+        $.ajax({
+            url: `/konfigurasi/setup/${id}/edit`,
+            method: "GET",
+            success: function(data){
+                // console.log(data);
+                $('#modal-edit').find('.modal-body').html(data);
+                $('#modal-edit').modal('show');
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    });
+
+    $(".btn-update").on('click', function(){
+        let id = $('#form-edit').find('#setup_id').val();
+        let formData = $('#form-edit').serialize();
+        console.log(id);
+        console.log(formData);
+
+        $.ajax({
+            url: `/konfigurasi/setup/${id}`,
+            method: "PATCH",
+            data: formData,
+            success: function(data){
+                // console.log(data);
+                $('#modal-edit').modal('hide');
+                window.location.assign('/konfigurasi/setup');
+            },
+            error: function(error){
+                console.log('error');
+                console.log(error);
             }
         });
     });

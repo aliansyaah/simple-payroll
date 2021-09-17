@@ -41,6 +41,8 @@ class SetupController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        $this->_validation($request);
+
         // Cara store 1
         // $setup = new Setup;
         // $setup->nama_aplikasi = $request->nama_aplikasi;
@@ -50,6 +52,24 @@ class SetupController extends Controller
         // Cara store 2
         $setup = Setup::create($request->all());
         return redirect()->back();
+    }
+
+    private function _validation(Request $request)
+    {
+        $validation = $request->validate(
+            [
+                'nama_aplikasi' => 'required|min:3|max:100',
+                'jumlah_hari_kerja' => 'required|min:1|max:11'
+            ],
+            [
+                'nama_aplikasi.required' => 'Nama aplikasi harus diisi',
+                'nama_aplikasi.min' => 'Nama aplikasi minimal 3 digit',
+                'nama_aplikasi.max' => 'Nama aplikasi maksimal 100 digit',
+                'jumlah_hari_kerja.required' => 'Jumlah hari kerja harus diisi',
+                'jumlah_hari_kerja.min' => 'Jumlah hari kerja minimal 1 digit',
+                'jumlah_hari_kerja.max' => 'Jumlah hari kerja maksimal 11 digit',
+            ]
+        );
     }
 
     /**
@@ -69,9 +89,17 @@ class SetupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    // public function edit($id)
+    // {
+    //     // echo $id;
+    //     $setup = Setup::find($id);
+    //     return view('konfigurasi.setup-edit', ['setup' => $setup]);
+    // }
+    
+    // Cara lain edit lebih simple
+    public function edit(Setup $setup)
     {
-        //
+        return view('konfigurasi.setup-edit', compact('setup'));
     }
 
     /**
@@ -83,7 +111,14 @@ class SetupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // echo $id;die;
+        // dd($request->all());
+        // $this->_validation($request);
+
+        Setup::where('id', $id)->update([
+            'nama_aplikasi' => $request->nama_aplikasi,
+            'jumlah_hari_kerja' => $request->jumlah_hari_kerja
+        ]);
     }
 
     /**
