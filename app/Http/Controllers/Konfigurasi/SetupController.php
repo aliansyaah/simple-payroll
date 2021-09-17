@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Konfigurasi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,9 +16,10 @@ class SetupController extends Controller
      */
     public function index()
     {
-        // $inventory = DB::table('inventory')->get();
-        $inventory = DB::table('inventory')->paginate(3);
-        return view('konfigurasi/setup', ['inventory' => $inventory]);
+        // $setup = Setup::first();   // first() utk nampilin satu record pertama
+        $setup = Setup::get();
+        // dd($setup);
+        return view('konfigurasi/setup', ['setup' => $setup]);
     }
 
     /**
@@ -38,7 +40,16 @@ class SetupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        // Cara store 1
+        // $setup = new Setup;
+        // $setup->nama_aplikasi = $request->nama_aplikasi;
+        // $setup->jumlah_hari_kerja = $request->jumlah_hari_kerja;
+        // $setup->save();
+
+        // Cara store 2
+        $setup = Setup::create($request->all());
+        return redirect()->back();
     }
 
     /**
