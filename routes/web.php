@@ -25,8 +25,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/dashboard', function () { return view('index'); });
-    Route::get('/dashboard', 'HomeController@index')->name('crud.add');
-    Route::get('/home', 'HomeController@index')->name('crud.edit');
     // Route::get('logout', 'App\Http\Controllers\Auth\AuthController@logout')->name('logout');
 
     Route::resource('konfigurasi/setup', 'Konfigurasi\SetupController');
