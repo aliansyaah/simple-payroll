@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Konfigurasi;
+namespace App\Http\Controllers\MasterData;
 
 use App\Http\Controllers\Controller;
-use App\Models\Setup;
+use App\Models\Divisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SetupController extends Controller
+class DivisiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,9 @@ class SetupController extends Controller
      */
     public function index()
     {
-        // $setup = Setup::first();   // first() utk nampilin satu record pertama
-        $setup = Setup::get();
-        // dd($setup);
-        return view('konfigurasi/setup', ['setup' => $setup]);
+        $data = Divisi::get();
+        // dd($data);
+        return view('masterdata/divisi', ['data' => $data]);
     }
 
     /**
@@ -43,14 +42,8 @@ class SetupController extends Controller
         // dd($request->all());
         $this->_validation($request);
 
-        // Cara store 1
-        // $setup = new Setup;
-        // $setup->nama_aplikasi = $request->nama_aplikasi;
-        // $setup->jumlah_hari_kerja = $request->jumlah_hari_kerja;
-        // $setup->save();
-
         // Cara store 2
-        Setup::create($request->all());
+        Divisi::create($request->all());
         return redirect()->back();
     }
 
@@ -58,17 +51,12 @@ class SetupController extends Controller
     {
         $validation = $request->validate(
             [
-                'nama_aplikasi' => 'required|min:3|max:100',
-                'jumlah_hari_kerja' => 'required|min:1|max:31|numeric'
+                'nama' => 'required|min:2|max:20'
             ],
             [
-                'nama_aplikasi.required' => 'Harus diisi',
-                'nama_aplikasi.min' => 'Minimal 3 digit',
-                'nama_aplikasi.max' => 'Maksimal 100 digit',
-                'jumlah_hari_kerja.required' => 'Harus diisi',
-                'jumlah_hari_kerja.min' => 'Minimal 1 hari',
-                'jumlah_hari_kerja.max' => 'Maksimal 31 hari',
-                'jumlah_hari_kerja.numeric' => 'Harus angka',
+                'nama.required' => 'Harus diisi',
+                'nama.min' => 'Minimal 2 digit',
+                'nama.max' => 'Maksimal 20 digit',
             ]
         );
     }
@@ -94,13 +82,13 @@ class SetupController extends Controller
     // {
     //     // echo $id;
     //     $setup = Setup::find($id);
-    //     return view('konfigurasi.setup-edit', ['setup' => $setup]);
+    //     return view('masterdata.divisi-edi', ['setup' => $setup]);
     // }
     
     // Cara lain edit lebih simple
     public function edit(Setup $setup)
     {
-        return view('konfigurasi.setup-edit', compact('setup'));
+        return view('masterdata.divisi-edit', compact('setup'));
     }
 
     /**

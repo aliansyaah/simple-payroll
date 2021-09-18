@@ -28,4 +28,5 @@ Route::group(['middleware' => 'auth'], function() {
     // Route::get('logout', 'App\Http\Controllers\Auth\AuthController@logout')->name('logout');
 
     Route::resource('konfigurasi/setup', 'Konfigurasi\SetupController');
+    Route::resource('master-data/divisi', 'MasterData\DivisiController');
 });

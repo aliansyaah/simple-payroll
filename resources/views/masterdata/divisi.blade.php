@@ -9,10 +9,7 @@
 
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
-            {{-- Jika belum ada data, tampilkan tombol tambah --}}
-            @if (sizeof($setup) == 0)
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus"></i> Tambah Data</button>
-            @endif
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus"></i> Tambah Data</button>
             <hr>
 
             {{-- Flash message --}}
@@ -30,17 +27,13 @@
             <table class="table table-striped table-bordered table-sm">
                 <tr>
                     <th>No.</th>
-                    <th>Hari Kerja</th>
-                    <th>Nama Aplikasi</th>
+                    <th>Nama Divisi</th>
                     <th>Action</th>
                 </tr>
-                @foreach ($setup as $no => $val)
+                @foreach ($data as $no => $val)
                     <tr>
                         <td>{{ $no+1 }}</td>
-                        <td>{{ $val->jumlah_hari_kerja }}</td>
-                        <td>{{ $val->nama_aplikasi }}</td>
-                        {{-- <td>1</td>
-                        <td>{{ $setup->jumlah_hari_kerja }}</td> --}}
+                        <td>{{ $val->nama }}</td>
                         <td>
                             <a href="#" data-id="{{ $val->id }}" class="badge badge-warning btn-edit">Edit</a>
                         </td>
@@ -62,33 +55,22 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('setup.store') }}" method="POST">
+                <form action="{{ route('divisi.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     {{-- Utk mengubah warna text mjd merah jika ada error --}}
-                                    <label @error('nama_aplikasi') class="text-danger" @enderror>
-                                        Nama Aplikasi
+                                    <label @error('nama') class="text-danger" @enderror>
+                                        Nama Divisi
                                         {{-- Jika ada error, print pesan error --}}
-                                        @error('nama_aplikasi')
+                                        @error('nama')
                                             | {{ $message }}
                                         @enderror
                                     </label>
                                     {{-- old('attr-name') berfungsi agar ketika user ada kesalahan, valuenya tidak hilang --}}
-                                    <input type="text" name="nama_aplikasi" class="form-control" value="{{ old('nama_aplikasi') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label @error('jumlah_hari_kerja') class="text-danger" @enderror>
-                                        Jumlah Hari Kerja
-                                        @error('jumlah_hari_kerja')
-                                            | {{ $message }}
-                                        @enderror
-                                    </label>
-                                    <input type="text" name="jumlah_hari_kerja" class="form-control" value="{{ old('jumlah_hari_kerja') }}">
+                                    <input type="text" name="nama" class="form-control" value="{{ old('nama') }}">
                                 </div>
                             </div>
                         </div>
