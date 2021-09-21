@@ -36,6 +36,13 @@
                         <td>{{ $val->nama }}</td>
                         <td>
                             <a href="#" data-id="{{ $val->id }}" class="badge badge-warning btn-edit">Edit</a>
+                            <a href="#" data-id="{{ $val->id }}" class="badge badge-danger swal-confirm">
+                                <form action="{{ route('divisi.destroy', $val->id) }}" id="deleteForm{{ $val->id }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                </form>
+                                Delete
+                            </a>
                         </td>
                     </tr>
                 @endforeach
@@ -118,6 +125,7 @@
 <script>
     $(".swal-confirm").click(function(e) {
         id = e.target.dataset.id;   // didapat dari "data-id" di <a href>
+        console.log(id);
 
         swal({
             title: 'Apakah Anda yakin?',

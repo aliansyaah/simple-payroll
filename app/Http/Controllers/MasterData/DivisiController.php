@@ -118,6 +118,8 @@ class DivisiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // echo $id;
+        Divisi::destroy($id);
+        return redirect()->route('divisi.index');
     }
 }
