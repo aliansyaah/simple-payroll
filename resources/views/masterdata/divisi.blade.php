@@ -100,7 +100,7 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="#" method="POST" id="form-edit">
+                <form action="#" id="form-edit">
                     @csrf
                     <div class="modal-body">
                         
@@ -158,7 +158,7 @@
         let id = $(this).data('id');
 
         $.ajax({
-            url: `/konfigurasi/setup/${id}/edit`,
+            url: `/master-data/divisi/${id}/edit`,
             method: "GET",
             success: function(data){
                 // console.log(data);
@@ -172,19 +172,20 @@
     });
 
     $(".btn-update").on('click', function(){
-        let id = $('#form-edit').find('#setup_id').val();
+        let id = $('#form-edit').find('#divisi_id').val();
         let formData = $('#form-edit').serialize();
         console.log(id);
         console.log(formData);
-
+        // return
+        
         $.ajax({
-            url: `/konfigurasi/setup/${id}`,
+            url: `/master-data/divisi/${id}`,
             method: "PATCH",
             data: formData,
             success: function(data){
                 // console.log(data);
                 $('#modal-edit').modal('hide');
-                window.location.assign('/konfigurasi/setup');
+                window.location.assign('/master-data/divisi');
             },
             error: function(err){
                 console.log(err);
@@ -192,26 +193,16 @@
 
                 let err_log = err.responseJSON.errors;
                 if(err.status == 422){
-                    if(typeof(err_log.nama_aplikasi) !== 'undefined'){
-                        // JQuery, cari elemen dgn id = "modal-edit" & name = "nama_aplikasi",
+                    if(typeof(err_log.nama) !== 'undefined'){
+                        // JQuery, cari elemen dgn id = "modal-edit" & name = "nama",
                         // timpa elemen sblmnya (prev) dgn html span
-                        $('#modal-edit').find('[name="nama_aplikasi"]')
-                        .prev().html('<span style="color: red">Nama Aplikasi | '+ err_log.nama_aplikasi[0] +'</span>')
+                        $('#modal-edit').find('[name="nama"]')
+                        .prev().html('<span style="color: red">Nama Divisi | '+ err_log.nama[0] +'</span>')
                     }else{
-                        $('#modal-edit').find('[name="nama_aplikasi"]')
-                        .prev().html('<span>Nama Aplikasi</span>')
+                        $('#modal-edit').find('[name="nama"]')
+                        .prev().html('<span>Nama Divisi</span>')
                     }
-
-                    if(typeof(err_log.jumlah_hari_kerja) !== 'undefined'){
-                        $('#modal-edit').find('[name="jumlah_hari_kerja"]')
-                        .prev().html('<span style="color: red">Jumlah Hari Kerja | '+ err_log.jumlah_hari_kerja[0] +'</span>')
-                        
-                        // Atau bisa juga pakai alert
-                        // alert('Jumlah Hari Kerja '+err_log.jumlah_hari_kerja[0]);
-                    }else{
-                        $('#modal-edit').find('[name="jumlah_hari_kerja"]')
-                        .prev().html('<span>Jumlah Hari Kerja</span>')
-                    }
+                    // $('#modal-edit').modal('show');
                 }
             }
         });

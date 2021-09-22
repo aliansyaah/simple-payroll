@@ -86,9 +86,9 @@ class DivisiController extends Controller
     // }
     
     // Cara lain edit lebih simple
-    public function edit(Setup $setup)
+    public function edit(Divisi $divisi)
     {
-        return view('masterdata.divisi-edit', compact('setup'));
+        return view('masterdata.divisi-edit', compact('divisi'));
     }
 
     /**
@@ -104,9 +104,8 @@ class DivisiController extends Controller
         // dd($request->all());
         $this->_validation($request);
 
-        Setup::where('id', $id)->update([
-            'nama_aplikasi' => $request->nama_aplikasi,
-            'jumlah_hari_kerja' => $request->jumlah_hari_kerja
+        Divisi::where('id', $id)->update([
+            'nama' => $request->nama
         ]);
     }
 
@@ -118,7 +117,7 @@ class DivisiController extends Controller
      */
     public function destroy($id)
     {
-        // echo $id;
+        // echo $id;die;
         Divisi::destroy($id);
         return redirect()->route('divisi.index');
     }
