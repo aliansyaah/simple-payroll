@@ -11,6 +11,14 @@ class Karyawan extends Model
     public function jabatan()
     {
         return $this->belongsTo('\App\Jabatan');
+
+        /* Jika nama kolom bukan jabatan_id di tabel karyawan, krn laravel otomatis menganggap foreign key itu namaTabel_id */
+        // return $this->belongsTo('\App\Jabatan', 'id_jab');
+    }
+
+    public function karyawan_keluarga()
+    {
+        return $this->hasMany('\App\Models\Karyawan_keluarga', 'karyawan_id');
     }
     
 }
