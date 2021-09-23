@@ -12,6 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UserSeeder::class);
-        $this->call(JabatanSeeder::class);
+        // $this->call(JabatanSeeder::class);
+
+        // Call factory
+        // 2 adalah jumlah data yang ingin dibuat
+        factory(App\Jabatan::class, 2)->create();
     }
 }
