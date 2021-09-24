@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MasterData;
 
+use App\Helpers\SiteHelpers;
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
 use Illuminate\Http\Request;
@@ -17,8 +18,12 @@ class DivisiController extends Controller
      */
     public function index()
     {
+        // dd(\App\Helpers\SiteHelpers::cek_akses());
+        // dd(SiteHelpers::cek_akses());
+
         // $this->authorize('akses_divisi', Divisi::class);
 
+        // Jika tidak punya akses, redirect ke dashboard
         if(!Gate::allows('akses')){
             return redirect()->route('dashboard');
         }
