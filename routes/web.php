@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::post('/', 'Auth\LoginController@login')->name('login');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/dashboard', function () { return view('index', ['alert_content' => "Data berhasil disimpan"]); });
+    Route::get('/dashboard', function () { return view('index', ['alert_content' => "Data berhasil disimpan"]); })->name('dashboard');
     // Route::get('logout', 'App\Http\Controllers\Auth\AuthController@logout')->name('logout');
 
     Route::resource('konfigurasi/setup', 'Konfigurasi\SetupController');

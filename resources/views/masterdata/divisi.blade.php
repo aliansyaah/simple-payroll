@@ -9,10 +9,17 @@
 
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
-            @can('tambah_divisi', \App\Models\Divisi::class)
+            {{-- Visibility tombol diambil dari GATE --}}
+            @can('tambah_data', \App\Models\Divisi::class)
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus"></i> Tambah Data</button>
                 <hr>
             @endcan
+
+            {{-- Visibility tombol diambil dari POLICY --}}
+            {{-- @can('tambah_divisi', \App\Models\Divisi::class)
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus"></i> Tambah Data</button>
+                <hr>
+            @endcan --}}
 
             {{-- Flash message --}}
             @if (session('message'))
@@ -38,7 +45,7 @@
                         <td>{{ $val->nama }}</td>
                         <td>
                             <a href="#" data-id="{{ $val->id }}" class="badge badge-warning btn-edit">Edit</a>
-                            @can('delete_divisi', \App\Models\Divisi::class)
+                            @can('hapus_data', \App\Models\Divisi::class)
                                 <a href="#" data-id="{{ $val->id }}" class="badge badge-danger swal-confirm">
                                     <form action="{{ route('divisi.destroy', $val->id) }}" id="deleteForm{{ $val->id }}" method="POST">
                                         @csrf
