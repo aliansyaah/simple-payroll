@@ -9,8 +9,10 @@
 
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus"></i> Tambah Data</button>
-            <hr>
+            @can('tambah_divisi', \App\Models\Divisi::class)
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus"></i> Tambah Data</button>
+                <hr>
+            @endcan
 
             {{-- Flash message --}}
             @if (session('message'))
@@ -36,13 +38,15 @@
                         <td>{{ $val->nama }}</td>
                         <td>
                             <a href="#" data-id="{{ $val->id }}" class="badge badge-warning btn-edit">Edit</a>
-                            <a href="#" data-id="{{ $val->id }}" class="badge badge-danger swal-confirm">
-                                <form action="{{ route('divisi.destroy', $val->id) }}" id="deleteForm{{ $val->id }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                </form>
-                                Delete
-                            </a>
+                            @can('delete_divisi', \App\Models\Divisi::class)
+                                <a href="#" data-id="{{ $val->id }}" class="badge badge-danger swal-confirm">
+                                    <form action="{{ route('divisi.destroy', $val->id) }}" id="deleteForm{{ $val->id }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                    </form>
+                                    Delete
+                                </a>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

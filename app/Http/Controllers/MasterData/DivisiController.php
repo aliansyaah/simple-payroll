@@ -16,6 +16,7 @@ class DivisiController extends Controller
      */
     public function index()
     {
+        // $this->authorize('akses_divisi', Divisi::class);
         $data = Divisi::get();
         // dd($data);
         return view('masterdata/divisi', ['data' => $data]);
