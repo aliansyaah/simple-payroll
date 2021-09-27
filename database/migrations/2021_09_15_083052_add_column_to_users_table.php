@@ -15,6 +15,7 @@ class AddColumnToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('username', 20)->after('name');
+            $table->integer('level_user_id');
         });
     }
 
@@ -27,6 +28,7 @@ class AddColumnToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('username');
+            $table->dropColumn('level_user_id');
         });
     }
 }
