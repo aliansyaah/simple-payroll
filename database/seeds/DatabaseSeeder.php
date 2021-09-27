@@ -13,9 +13,13 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UserSeeder::class);
         // $this->call(JabatanSeeder::class);
+        // $this->call(LevelUsersSeeder::class);
+        // $this->call(MenuSeeder::class);
+        // $this->call(AksesSeeder::class);
+        // $this->call(UsersSeeder::class);
 
         // Call factory
         // 2 adalah jumlah data yang ingin dibuat
-        factory(App\Jabatan::class, 2)->create();
+        // factory(App\Jabatan::class, 2)->create();
     }
 }
