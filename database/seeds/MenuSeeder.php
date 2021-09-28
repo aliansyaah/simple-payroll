@@ -17,7 +17,7 @@ class MenuSeeder extends Seeder
                 'nama_menu' => 'Master Data',
                 'level_menu' => 'main_menu',
                 'master_menu' => 0,
-                'url' => '',
+                'url' => 'master-data',
                 'aktif' => 'Y',
                 'no_urut' => 1
             ],
@@ -41,7 +41,7 @@ class MenuSeeder extends Seeder
                 'nama_menu' => 'Konfigurasi',
                 'level_menu' => 'main_menu',
                 'master_menu' => 0,
-                'url' => '',
+                'url' => 'konfigurasi',
                 'aktif' => 'Y',
                 'no_urut' => 4
             ],

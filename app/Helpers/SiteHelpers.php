@@ -13,4 +13,28 @@ class SiteHelpers
         $user = DB::table('users')->where('username', 'aliansyaah')->first();
         return $user;
     }
+
+    public static function main_menu()
+    {
+        $data = DB::table('akses')
+            ->join('menu', 'menu.id', '=', 'akses.menu_id')
+            ->select('menu.*', 'akses.akses', 'akses.tambah', 'akses.edit', 'akses.hapus')
+            ->where('akses.level_user_id', '1')
+            ->where('menu.level_menu', 'main_menu')
+            ->get();
+        
+        return $data;
+    }
+
+    public static function sub_menu()
+    {
+        $data = DB::table('akses')
+            ->join('menu', 'menu.id', '=', 'akses.menu_id')
+            ->select('menu.*', 'akses.akses', 'akses.tambah', 'akses.edit', 'akses.hapus')
+            ->where('akses.level_user_id', '1')
+            ->where('menu.level_menu', 'sub_menu')
+            ->get();
+        
+        return $data;
+    }
 }
