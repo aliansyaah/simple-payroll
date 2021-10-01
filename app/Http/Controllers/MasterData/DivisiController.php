@@ -8,6 +8,7 @@ use App\Models\Divisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 
 class DivisiController extends Controller
 {
@@ -29,6 +30,14 @@ class DivisiController extends Controller
         }
         $data = Divisi::get();
         // dd($data);
+
+        // Get current url
+        // print_r(URL::current());
+        // echo "<br>";
+        // print_r(url()->current());
+        // echo "<br>";
+        // print_r(request()->route()->uri);die;
+
         return view('masterdata/divisi', ['data' => $data]);
     }
 

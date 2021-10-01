@@ -37,4 +37,16 @@ class SiteHelpers
         
         return $data;
     }
+
+    public static function get_menu_name($url)
+    {
+        $result = DB::table('menu')->where('url', $url)->first();
+        // dd($result);
+        if($result){
+            $menu_name = $result->nama_menu;
+        }else{
+            $menu_name = "Nama Menu Tidak Ditemukan";
+        }
+        return $menu_name;
+    }
 }

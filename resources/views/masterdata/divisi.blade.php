@@ -12,7 +12,7 @@
             {{-- Visibility tombol diambil dari GATE --}}
             @can('tambah_data', \App\Models\Divisi::class)
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus"></i> Tambah Data</button>
-                {{ SiteHelpers::cek_akses()->name }}
+                {{-- {{ SiteHelpers::cek_akses()->name }} --}}
                 <hr>
             @endcan
 
