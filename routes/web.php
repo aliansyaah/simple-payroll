@@ -28,7 +28,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/dashboard', function () { return view('index', ['alert_content' => "Selamat Datang"]); })->name('dashboard');
     // Route::get('logout', 'App\Http\Controllers\Auth\AuthController@logout')->name('logout');
 
+    /*  Make controller with resource:
+        php artisan make:controller Konfigurasi/SetupController -r
+    */
+    // resource('master-menu/sub-menu')
     Route::resource('konfigurasi/setup', 'Konfigurasi\SetupController');
     Route::resource('master-data/divisi', 'MasterData\DivisiController');
     Route::resource('master-data/karyawan', 'MasterData\KaryawanController');
+    Route::resource('transaksi/absensi', 'Transaksi\AbsensiController');
 });

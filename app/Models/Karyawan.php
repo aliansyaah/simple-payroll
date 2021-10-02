@@ -25,5 +25,10 @@ class Karyawan extends Model
     {
         return $this->hasMany('\App\Models\Karyawan_keluarga', 'karyawan_id');
     }
+
+    public function absensi()
+    {
+        return $this->hasMany('\App\Models\Absensi', 'karyawan_id');
+    }
     
 }
