@@ -27,7 +27,7 @@ class AddLevelUserToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->fropForeign('users_level_user_id_foreign');
+            $table->dropForeign('users_level_user_id_foreign');
             $table->dropColumn('level_user_id');
         });
     }
