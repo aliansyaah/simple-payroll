@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(LevelUsersSeeder::class);
         // $this->call(MenuSeeder::class);
         // $this->call(AksesSeeder::class);
-        $this->call(RolesSeeder::class);
+        // $this->call(RolesSeeder::class);
+        // $this->call(RoleUserSeeder::class);
 
         // Call factory
         // 2 adalah jumlah data yang ingin dibuat

@@ -53,6 +53,30 @@ class MenuSeeder extends Seeder
                 'aktif' => 'Y',
                 'no_urut' => 5
             ],
+            [
+                'nama_menu' => 'Transaksi',
+                'level_menu' => 'main_menu',
+                'master_menu' => 0,
+                'url' => 'transaksi',
+                'aktif' => 'Y',
+                'no_urut' => 6
+            ],
+            [
+                'nama_menu' => 'Absensi',
+                'level_menu' => 'sub_menu',
+                'master_menu' => 6,
+                'url' => 'transaksi/absensi',
+                'aktif' => 'Y',
+                'no_urut' => 7
+            ],
+            [
+                'nama_menu' => 'Gaji',
+                'level_menu' => 'sub_menu',
+                'master_menu' => 6,
+                'url' => 'transaksi/gaji',
+                'aktif' => 'Y',
+                'no_urut' => 8
+            ],
         ]);
     }
 }
