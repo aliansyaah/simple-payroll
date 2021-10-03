@@ -12,11 +12,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UserSeeder::class);
+        // $this->call(UsersSeeder::class);
         // $this->call(JabatanSeeder::class);
         // $this->call(LevelUsersSeeder::class);
         // $this->call(MenuSeeder::class);
         // $this->call(AksesSeeder::class);
-        // $this->call(UsersSeeder::class);
+        $this->call(RolesSeeder::class);
 
         // Call factory
         // 2 adalah jumlah data yang ingin dibuat
