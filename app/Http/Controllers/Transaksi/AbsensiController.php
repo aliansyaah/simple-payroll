@@ -15,16 +15,17 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        $absensi = Absensi::first();   // first() utk nampilin satu record pertama
-        // $absensi = Absensi::get();
-
+        /* $absensi = Absensi::first();   // first() utk nampilin satu record pertama
         $absensi = Absensi::find(1);
         $karyawan = Absensi::find(1)->karyawan;
         // dd($karyawan);
 
         echo "Tahun: ".$absensi->tahun;
         echo "<br>Bulan: ".$absensi->bulan;
-        echo "<br>Nama Karyawan: ".$karyawan->nama_karyawan;
+        echo "<br>Nama Karyawan: ".$karyawan->nama_karyawan; */
+
+        $data = Absensi::get();
+        return view('transaksi/absensi', ['data' => $data]);
     }
 
     /**
