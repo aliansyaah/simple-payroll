@@ -19,6 +19,7 @@ class CreateGajiTable extends Migration
             $table->foreign('karyawan_id')->references('id')->on('karyawan');
             $table->unsignedBigInteger('absensi_id');
             $table->foreign('absensi_id')->references('id')->on('absensi');
+            $table->date('tanggal');
             $table->integer('gaji_pokok', false, false);
             $table->integer('tunjangan_jabatan', false, false);
             $table->integer('tunjangan_makan_perhari', false, false);

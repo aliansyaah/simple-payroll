@@ -20,8 +20,8 @@ class GajiSeeder extends Seeder
                 'tanggal' => '2021-01-25',
                 'gaji_pokok' => 5000000,
                 'tunjangan_jabatan' => 300000,
-                'tunjangan_makan' => 25000,
-                'tunjangan_transport' => 20000,
+                'tunjangan_makan_perhari' => 25000,
+                'tunjangan_transport_perhari' => 20000,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],

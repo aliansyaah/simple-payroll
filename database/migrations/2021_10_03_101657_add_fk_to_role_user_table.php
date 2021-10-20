@@ -36,10 +36,10 @@ class AddFkToRoleUserTable extends Migration
     {
         Schema::table('role_user', function (Blueprint $table) {
             // $table->integer('user_id')->change();
-            DB::statement("ALTER TABLE `role_user` CHANGE COLUMN `user_id` `user_id` BIGINT(20)");
             
             $table->dropForeign('role_user_fk0');
             $table->dropForeign('role_user_fk1');
+            // DB::statement("ALTER TABLE `role_user` CHANGE COLUMN `user_id` `user_id` BIGINT(20)");
         });
     }
 }

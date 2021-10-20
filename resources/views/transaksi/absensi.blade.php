@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
             {{-- Visibility tombol diambil dari GATE --}}
-            @can('tambah_data', \App\Models\Divisi::class)
+            @can('tambah_data', \App\Absensi::class)
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus"></i> Tambah Data</button>
                 {{-- {{ SiteHelpers::cek_akses()->name }} --}}
                 <hr>

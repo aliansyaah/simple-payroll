@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -14,7 +15,10 @@ class CreateKaryawanKeluargaTable extends Migration
     public function up()
     {
         Schema::create('karyawan_keluarga', function (Blueprint $table) {
-            $table->unsignedBigInteger('karyawan_id', 20);
+            // $table->unsignedBigInteger('karyawan_id', 20);
+
+            // Agar karyawan_id tidak tergenerate otomatis menjadi primary key
+            $table->bigInteger('karyawan_id')->length(20)->unsigned();
             $table->foreign('karyawan_id')->references('id')->on('karyawan');
             $table->string('hubungan', 30);
             $table->string('nama', 40);
